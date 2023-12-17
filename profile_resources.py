@@ -10,20 +10,20 @@ class ProfileResource:
     def get_connection():
         conn = pymysql.connect(
             # LOCAL
-            host="localhost",
-            port=3306,
-            user="root",
-            password="密码",
-            cursorclass=pymysql.cursors.DictCursor,
-            autocommit=True
-
-            # AWS
-            # host="customerdb.cvjaygaiwg1r.us-east-1.rds.amazonaws.com",
+            # host="localhost",
             # port=3306,
-            # user="admin",
+            # user="root",
             # password="dbuserdbuser",
             # cursorclass=pymysql.cursors.DictCursor,
             # autocommit=True
+
+            # AWS
+            host="student-profile.c2qoohstwy71.us-east-2.rds.amazonaws.com",
+            port=3306,
+            user="lzx",
+            password="Sharonzl3218",
+            cursorclass=pymysql.cursors.DictCursor,
+            autocommit=True
         )
 
         return conn
@@ -38,27 +38,29 @@ class ProfileResource:
 
         return result
 
-    # @staticmethod
-    # def delete_account_by_emailID(key):
-    #     sql = "DELETE FROM customerDB.account WHERE emailID=%s"
-    #     conn = AccountResource.get_connection()
-    #     cur = conn.cursor()
-    #     res = cur.execute(sql, args=key)
-    #     result = cur.fetchone()
-    #
-    #     return result
-    #
-    # @staticmethod
-    # def create_account(account):
-    #     placeholder = ", ".join(["%s"] * len(account))
-    #     sql = "INSERT INTO customerDB.account({columns}) VALUES ({values})".format(columns=",".join(account.keys()),
-    #                                                                                values=placeholder)
-    #     conn = AccountResource.get_connection()
-    #     cur = conn.cursor()
-    #     res = cur.execute(sql, list(account.values()))
-    #     result = cur.fetchone()
-    #
-    #     return result
+    @staticmethod
+    def delete_profile_by_uni(key):
+        sql = "DELETE FROM student_profile.student_info WHERE uni=%s"
+        conn = ProfileResource.get_connection()
+        cur = conn.cursor()
+        res = cur.execute(sql, args=key)
+        result = cur.fetchone()
+
+        return result
+
+    @staticmethod
+    def create_account(new_account):
+        # placeholder = ", ".join(["%s"] * len(new_account))
+        # sql = "INSERT INTO student_profile.student_info({columns}) VALUES ({values})".format(columns=",".join(new_account.keys()),
+        #                                                                            values=placeholder)
+        sql = "INSERT INTO student_profile.student_info(uni, name, interest, schedule, email) VALUES (%s, %s, %s, %s, %s)"
+        conn = ProfileResource.get_connection()
+        cur = conn.cursor()
+        # res = cur.execute(sql, list(new_account.values()))
+        res = cur.execute(sql, (new_account[0], new_account[1], new_account[2], new_account[3], new_account[4]))
+        result = cur.fetchone()
+
+        return result
     #
     @staticmethod
     def update_account(new_content):
