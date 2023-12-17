@@ -74,7 +74,6 @@ def add():
         students.append({'uni':uni,'name':name,'schedule':schedule,'interests':interests})
         return redirect(url_for('admin'))
 
-
 @app.route('/modify/<uni>', methods=['GET', 'POST'])
 def modify(uni):
     student_to_modify = next((student for student in students if student['uni'] == uni), None)
