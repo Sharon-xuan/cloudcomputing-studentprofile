@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>student profile system</title>
+<!--    <link rel="stylesheet" href="{{ url_for('static',filename='bootstrap/bootstrap.min.css') }}">-->
+</head>
+<body>
+    <table class="table" style="width: 600px; margin: 50px auto ">
+        <thead>
+          <tr>
+            <th scope="col">uni</th>
+            <th scope="col">name</th>
+            <th scope="col">schedule</th>
+            <th scope="col">interests</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for student in students %}
+            <tr>
+                <td>{{ student.uni }}</td>
+                <td>{{ student.name }}</td>
+                <td>{{ student.schedule }}</td>
+                <td>{{ student.interests }}</td>
+                <td>
+                    <a href="{{ url_for('delete_student', uni=student.uni) }}">delete</a>
+                    <span>|</span>
+                    <a href="{{ url_for('modify', uni=student.uni) }}">modify</a>
+                    <span>|</span>
+                    <a href="{{ url_for('add') }}">add</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+      </table>
+</body>
+</html>

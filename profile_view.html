@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Viewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+        }
+        #profileContainer {
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Profile Viewer</h1>
+    <button id="loadProfile">Load Profile</button>
+    <div id="profileContainer"></div>
+
+    <script>
+        document.getElementById('loadProfile').addEventListener('click', function() {
+            fetch('http://127.0.0.1:5000/student/123') // 请根据实际的学生 ID 调整 URL
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Network response was not ok');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    const container = document.getElementById('profileContainer');
+                    container.innerHTML = `<pre>${JSON.stringify(data, null, 2)}</pre>`;
+                })
+                .catch(error => {
+                    console.error('There has been a problem with your fetch operation:', error);
+                });
+        });
+    </script>
+</body>
+</html>

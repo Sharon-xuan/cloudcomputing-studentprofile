@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modify Student</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap/bootstrap.min.css') }}">
+</head>
+<body>
+    <div style="width: 600px; margin: 50px auto;">
+        <h2>Modify Student</h2>
+        <form action="{{ url_for('modify', uni=student['uni']) }}" method="post">
+            <input type="hidden" name="uni" value="{{ student['uni'] }}">
+            <div class="mb-3">
+                <label for="name" class="form-label">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ student['name'] }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="schedule" class="form-label">Schedule</label>
+                <input type="text" class="form-control" id="schedule" name="schedule" value="{{ student['schedule'] }}" required>
+            </div>
+            <div class="mb-3">
+                <label for="interests" class="form-label">Interests</label>
+                <input type="text" class="form-control" id="interests" name="interests" value="{{ student['interests'] }}" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Update Student</button>
+        </form>
+    </div>
+</body>
+</html>
